@@ -6,4 +6,5 @@ Based on [phaser-es6-webpack](https://github.com/lean/phaser-es6-webpack) starte
 
  * [Matt Edlefsen](https://github.com/medlefsen)
  * [George Barrett](https://github.com/nefariousdeeds)
+ * Alex Cole
  * [John Stahl](https://github.com/JohnStahl)
