@@ -11,6 +11,7 @@ export default class extends Phaser.State {
 
     // Load assets
     this.loadAudio('song','mp3')
+    this.loadAudio('songAltered','mp3')
 
     this.load.onLoadComplete.add( () => {
       this.state.start('Splash')
