@@ -31,9 +31,10 @@ export default class extends Phaser.State {
     this.game.add.existing(this.player)
 
     this.pauseText = this.game.add.text(
-      this.game.world.centerX, this.game.world.centerY-100,
+      this.camera.width/2, this.camera.height/2,
       "PAUSED", {font: `42px ${config.font}`, fill: '#820900'}
     )
+    this.pauseText.fixedToCamera = true
     this.pauseText.anchor.setTo(0.5)
     this.pauseText.visible = false
 
