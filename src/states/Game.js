@@ -5,16 +5,26 @@ import config from '../config'
 import Player from '../sprites/Player'
 
 export default class extends Phaser.State {
-  preload () {
+  init() {
+    this.screens = 5
   }
 
   create () {
+    this.world.setBounds(0,0,this.camera.width*this.screens,this.camera.height)
+    this.physics.startSystem(Phaser.Physics.P2JS);
+
     this.game.physics.startSystem(Phaser.Physics.P2JS);
 
     this.game.physics.p2.applyGravity = true
     this.game.physics.p2.gravity.y = 400
+    this.game.physics.p2.updateBoundsCollisionGroup();
 
-    this.player = new Player(this.game,this.game.world.centerX,this.game.world.height-70)
+    this.playerCG = this.newCG()
+    this.worldCG = this.newCG()
+
+    this.player = new Player(this.game,100,this.game.world.height-70)
+    this.player.setCollisionGroup(this.playerCG)
+    this.player.collides(this.worldCG)
     this.game.add.existing(this.player)
 
     this.pauseText = this.game.add.text(
@@ -38,19 +48,44 @@ export default class extends Phaser.State {
   }
 
   update() {
-    let stop = true
+    let stop = this.player.isState('walk')
     if(this.cursors.up.isDown) {
       stop = false
       this.player.jump()
     }
     if (this.cursors.left.isDown) {
       stop = false
-      this.player.walkLeft()
+      this.player.moveLeft()
     } else if (this.cursors.right.isDown) {
       stop = false
-      this.player.walkRight()
+      this.player.moveRight()
     }
     if(stop) this.player.stop()
+    this.setCamera()
+  }
+
+  setCamera() {
+    this.camera.x =
+      Math.floor(this.player.x / config.gameWidth) * config.gameWidth
+  }
+
+  createCameraKeys() {
+    let left = this.input.keyboard.addKey(Phaser.Keyboard.OPEN_BRACKET)
+    let right = this.input.keyboard.addKey(Phaser.Keyboard.CLOSED_BRACKET)
+
+    left.onDown.add(()=>{
+      console.log(this.camera.x)
+      if(this.camera.x > 0) {
+        this.camera.setPosition(this.camera.x-config.gameWidth)
+      }
+    })
+
+    right.onDown.add(()=>{
+      console.log(this.camera.x)
+      if(this.camera.x < (this.world.width - config.gameWidth)) {
+        this.camera.setPosition(this.camera.x+config.gameWidth)
+      }
+    })
   }
 
   pause() {
@@ -61,5 +96,9 @@ export default class extends Phaser.State {
       this.game.paused = true
       this.pauseText.visible = true
     }
+  }
+
+  newCG() {
+    return this.game.physics.p2.createCollisionGroup();
   }
 }

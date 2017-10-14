@@ -6,7 +6,14 @@ export default class extends Phaser.Sprite {
     this.game.physics.p2.enable([this], false)
     this.body.fixedRotation = true
     this.addAnimations()
-    this.state = {}
+    this.state = {name:''}
+  }
+
+  setCollisionGroup(cg) {
+    this.cg = cg
+  }
+  collides(cgs) {
+    this.cgs = cgs
   }
 
   setState(name,func) {
@@ -26,7 +33,9 @@ export default class extends Phaser.Sprite {
   }
 
   isState(name) {
-    return name === this.state.name
+    const cur = this.state.name
+    return (cur.length === name.length || cur[name.length] === '/') &&
+      cur.startsWith(name)
   }
 
   addAnimations() {
@@ -58,6 +67,7 @@ export default class extends Phaser.Sprite {
     this.body.loadPolygon(this.key, this.frameName)
     if(this.cg) this.body.setCollisionGroup(this.cg)
     if(this.cgs) this.body.collides(this.cgs)
+    this.body.collideWorldBounds = true
   }
 
   canJump() {
