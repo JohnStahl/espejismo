@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 
 import config from '../config'
 import Player from '../sprites/Player'
+import Background from '../sprites/Background'
 
 export default class extends Phaser.State {
   init() {
@@ -10,6 +11,8 @@ export default class extends Phaser.State {
   }
 
   create () {
+    this.background = new Background(this.game)
+    this.game.add.existing(this.background)
     this.world.setBounds(0,0,this.camera.width*this.screens,this.camera.height)
     this.physics.startSystem(Phaser.Physics.P2JS);
 

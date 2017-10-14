@@ -12,12 +12,17 @@ export default class extends Phaser.State {
     // Load assets
     this.loadAudio('song','mp3')
     this.loadAudio('songAltered','mp3')
+    this.loadImage('background')
 
     this.loadCharacter('man')
 
     this.load.onLoadComplete.add( () => {
       this.state.start('Splash')
     });
+  }
+
+  loadImage(name,ext = 'png') {
+    this.load.image(name,`./assets/images/${name}.${ext}`)
   }
 
   loadAudio(name,ext = 'wav') {
