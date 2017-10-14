@@ -2,6 +2,7 @@
 import Phaser from 'phaser'
 
 import config from '../config'
+import Player from '../sprites/Player'
 
 export default class extends Phaser.State {
   preload () {
@@ -9,6 +10,12 @@ export default class extends Phaser.State {
 
   create () {
     this.game.physics.startSystem(Phaser.Physics.P2JS);
+
+    this.game.physics.p2.applyGravity = true
+    this.game.physics.p2.gravity.y = 400
+
+    this.player = new Player(this.game,this.game.world.centerX,this.game.world.centerY)
+    this.game.add.existing(this.player)
 
     this.pauseText = this.game.add.text(
       this.game.world.centerX, this.game.world.centerY-100,
@@ -27,22 +34,23 @@ export default class extends Phaser.State {
     this.song2 = this.add.audio('songAltered',0.5)
     this.song2.play()
 
-    let left = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT)
-    let right = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
+    this.cursors = this.game.input.keyboard.createCursorKeys()
+  }
 
-    left.onDown.add(() => {
-      if(this.song1.volume > 0) {
-        this.song1.fadeTo(1000,this.song1.volume - 0.1)
-        this.song2.fadeTo(1000,this.song2.volume + 0.1)
-      }
-    })
-
-    right.onDown.add(() => {
-      if(this.song2.volume > 0) {
-        this.song2.fadeTo(1000,this.song2.volume - 0.1)
-        this.song1.fadeTo(1000,this.song1.volume + 0.1)
-      }
-    })
+  update() {
+    let stop = true
+    if(this.cursors.up.isDown) {
+      stop = false
+      this.player.jump()
+    }
+    if (this.cursors.left.isDown) {
+      stop = false
+      this.player.walkLeft()
+    } else if (this.cursors.right.isDown) {
+      stop = false
+      this.player.walkRight()
+    }
+    if(stop) this.player.stop()
   }
 
   pause() {
