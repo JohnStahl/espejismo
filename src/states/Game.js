@@ -66,26 +66,7 @@ export default class extends Phaser.State {
 
   setCamera() {
     this.camera.x =
-      Math.floor(this.player.x / config.gameWidth) * config.gameWidth
-  }
-
-  createCameraKeys() {
-    let left = this.input.keyboard.addKey(Phaser.Keyboard.OPEN_BRACKET)
-    let right = this.input.keyboard.addKey(Phaser.Keyboard.CLOSED_BRACKET)
-
-    left.onDown.add(()=>{
-      console.log(this.camera.x)
-      if(this.camera.x > 0) {
-        this.camera.setPosition(this.camera.x-config.gameWidth)
-      }
-    })
-
-    right.onDown.add(()=>{
-      console.log(this.camera.x)
-      if(this.camera.x < (this.world.width - config.gameWidth)) {
-        this.camera.setPosition(this.camera.x+config.gameWidth)
-      }
-    })
+      Math.floor(this.player.x / this.camera.width) * this.camera.width
   }
 
   pause() {

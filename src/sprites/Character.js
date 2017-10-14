@@ -27,7 +27,6 @@ export default class extends Phaser.Sprite {
           return
         }
       }
-      console.log(`Setting state to ${newState.name}`)
       this.state = newState
     }
   }

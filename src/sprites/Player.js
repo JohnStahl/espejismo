@@ -44,7 +44,6 @@ export default class extends Character {
         return this.game.time.now > jumpTime && this.canJump()
       }
       s.update = ()=>{
-        console.log(this.canJump())
         if(this.canJump()) {
           this.stop()
         }
@@ -58,7 +57,6 @@ export default class extends Character {
 
   stop() {
     this.setState('stopped',()=>{
-      console.log('stopping')
       this.animations.stop(null, true)
       this.body.setZeroVelocity()
     })
