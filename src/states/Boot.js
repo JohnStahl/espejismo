@@ -14,6 +14,10 @@ export default class extends Phaser.State {
     this.loadAudio('songAltered','mp3')
     this.loadImage('background')
 
+    this.loadImage('grass_1')
+    this.loadImage('grass_2')
+    this.loadImage('tree')
+
     this.loadCharacter('man')
 
     this.load.onLoadComplete.add( () => {

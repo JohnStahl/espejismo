@@ -4,10 +4,38 @@ import Phaser from 'phaser'
 import config from '../config'
 import Player from '../sprites/Player'
 import Background from '../sprites/Background'
+import StaticObject from "../sprites/StaticObject";
 
 export default class extends Phaser.State {
   init() {
     this.screens = 5
+  }
+
+  createObjects() {
+    // Stage 1
+    this.createObject(0, 200, -20, 'grass_1')
+    this.createObject(0, 400, -20, 'grass_2')
+
+    // Stage 2
+    this.createObject(1, 100, -20, 'grass_2')
+    this.createObject(1, 700, -20, 'grass_1')
+    this.createObject(1, 800, -20, 'grass_2')
+
+    // Stage 3
+    this.createObject(2, 500, -20, 'grass_1')
+
+    // Stage 4
+    this.createObject(3, 300, -20, 'grass_2')
+    this.createObject(3, 600, -20, 'grass_1')
+
+    // Stage 5
+    this.createObject(4,-360, -120, 'tree')
+  }
+
+  createObject(...args) {
+    let obj = new StaticObject(this.game,...args)
+    this.game.add.existing(obj)
+    return obj
   }
 
   create () {
@@ -24,6 +52,8 @@ export default class extends Phaser.State {
 
     this.playerCG = this.newCG()
     this.worldCG = this.newCG()
+
+    this.createObjects()
 
     this.player = new Player(this.game,100,this.game.world.height-70)
     this.player.setCollisionGroup(this.playerCG)
