@@ -14,7 +14,7 @@ export default class extends Phaser.State {
     this.game.physics.p2.applyGravity = true
     this.game.physics.p2.gravity.y = 400
 
-    this.player = new Player(this.game,this.game.world.centerX,this.game.world.centerY)
+    this.player = new Player(this.game,this.game.world.centerX,this.game.world.height-70)
     this.game.add.existing(this.player)
 
     this.pauseText = this.game.add.text(
