@@ -4,6 +4,7 @@ import Character from './Character'
 export default class extends Character {
   constructor(game,x,y) {
     super(game,x,y,'man','walk_right/0001')
+    this.initialY = y
     this.setState('stopped')
     this.moveVel = 200
     this.jumpMoveVel = 100
@@ -55,18 +56,19 @@ export default class extends Character {
     }
   }
 
+  stopWalking() {
+    if(this.isState('walk')) {
+      this.stop()
+    }
+  }
+
   jump() {
     this.setState('jump')
   }
 
-  stop() {
-    this.setState('stopped')
+  stop(force = false) {
+    this.setState('stopped',force)
   }
-
-  isZero(num) {
-    return Math.abs(num) < 4.0;
-  }
-
 
   update() {
     super.update()
@@ -74,33 +76,12 @@ export default class extends Character {
       if (this.isState('walk/left')) {
         this.stop()
       }
-      this.body.x = this.game.camera.x + 46
-    }
-
-    if(this.resetVelocity) {
-      this.body.velocity.x = this.saved.velocityX
-      this.body.velocity.y = this.saved.velocityY
-      this.resetVelocity = false
+      this.moveToEdge()
     }
   }
 
-  reset() {
-    this.body.x = this.saved.x
-    this.body.y = this.saved.y
-    this.resetVelocity = true
-    this.health = this.saved.health
-    this.setState(this.saved.state,true)
-  }
-
-  setStage(stage) {
-    this.saved = {
-      x: this.body.x,
-      y: this.body.y,
-      velocityX: this.body.velocity.x,
-      velocityY: this.body.velocity.y,
-      health: this.health,
-      state: this.state.name
-    }
+  moveToEdge() {
+    this.body.x = this.game.camera.x + 46
   }
 
   leftEdge(fudge = 0) {

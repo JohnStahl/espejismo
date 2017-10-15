@@ -8,6 +8,7 @@ export default class extends Phaser.Sprite {
     this.addAnimations()
     this.state = {name:''}
     this.stateMap = {}
+    this.outOfBoundsKill = true
   }
 
   addState(name,func) {

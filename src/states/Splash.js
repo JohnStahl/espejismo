@@ -2,8 +2,9 @@ import Phaser from 'phaser'
 
 import config from '../config'
 import { centerGameObjects } from '../utils'
+import Game from "./Game";
 
-export default class extends Phaser.State {
+export default class extends Game {
   create () {
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
@@ -14,7 +15,7 @@ export default class extends Phaser.State {
     let title = this.addText("Press Space to Start", `42px ${config.font}`, '#820900')
     let controls = this.addText("movement: left/right arrow keys jump: up arrow", `30px ${config.font}`, '#820900') //just places text over title
     
-    this.song1 = this.add.audio('song',0.5)
+    this.song1 = this.add.audio('song',0.5,true)
     this.song1.play()
   }
 
@@ -39,8 +40,11 @@ export default class extends Phaser.State {
   }
 
   update () {
+    if(this.hold) return
     if (this.spaceKey.isDown){
-      this.state.start('Game');
+      this.fadeOut(()=>{
+        this.state.start('Level1');
+      })
     }
   }
 }
