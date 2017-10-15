@@ -17,6 +17,7 @@ export default class extends Phaser.State {
     this.loadImage('grass_1')
     this.loadImage('grass_2')
     this.loadImage('tree')
+    this.loadImage('title')
 
     this.loadCharacter('man')
 
