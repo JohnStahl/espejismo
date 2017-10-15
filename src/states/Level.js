@@ -13,7 +13,6 @@ export default class extends Game {
   create() {
     this.background = new Background(this.game)
     this.game.add.existing(this.background)
-    this.createFade()
 
     this.physics.startSystem(Phaser.Physics.P2JS);
     this.game.physics.p2.applyGravity = true
@@ -59,6 +58,8 @@ export default class extends Game {
 
     this.backspace = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
     this.cursors = this.game.input.keyboard.createCursorKeys()
+
+    this.createFade()
 
     this.fadeIn(()=>{
       this.wait(500,()=>{
