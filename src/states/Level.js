@@ -71,7 +71,7 @@ export default class extends Game {
   createObjects() {}
 
   createGround() {
-    this.ground = this.addGround(0,this.game.world.width)
+    this.addGround(0,this.game.world.width)
   }
 
   addGround(fromX,toX) {
@@ -99,6 +99,11 @@ export default class extends Game {
       this.fadeOut(()=>{
         this.state.start(this.nextLevel())
       })
+      return
+    }
+    if(this.player.body.y > this.game.world.height) {
+      this.player.kill()
+      return
     }
     this.levelUpdate()
   }
@@ -126,6 +131,15 @@ export default class extends Game {
   createObject(...args) {
     let obj = new StaticObject(this.game,...args)
     this.game.add.existing(obj)
+    return obj
+  }
+
+  createObjectWithPhysics(...args) {
+    let obj = this.createObject(...args)
+    obj.body.clearShapes()
+    obj.body.loadPolygon('objects',obj.key)
+    obj.body.setCollisionGroup(this.worldCG)
+    obj.body.collides([this.playerCG,this.enemiesCG])
     return obj
   }
 

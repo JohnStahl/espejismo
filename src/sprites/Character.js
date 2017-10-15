@@ -8,7 +8,6 @@ export default class extends Phaser.Sprite {
     this.addAnimations()
     this.state = {name:''}
     this.stateMap = {}
-    this.outOfBoundsKill = true
   }
 
   addState(name,func) {
@@ -73,7 +72,6 @@ export default class extends Phaser.Sprite {
     this.body.loadPolygon(this.key, this.frameName)
     if(this.cg) this.body.setCollisionGroup(this.cg)
     if(this.cgs) this.body.collides(this.cgs)
-    this.body.collideWorldBounds = true
   }
 
   canJump() {

@@ -3,10 +3,15 @@ import Level from "../Level";
 export default class extends Level {
   nextLevel() { return 'Level3' }
 
+  groundLevel() {
+    return this.game.world.height - 160
+  }
+
+  createGround() {}
+
   createObjects() {
-    this.createObject(100, -20, 'grass_2')
-    this.createObject(700, -20, 'grass_1')
-    this.createObject(800, -20, 'grass_2')
+    this.createObjectWithPhysics(0, 0, 'bridge_left')
+    this.createObjectWithPhysics(-100, 0, 'bridge_right')
   }
 
   levelStart() {

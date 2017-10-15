@@ -12,12 +12,17 @@ export default class extends Phaser.State {
     // Load assets
     this.loadAudio('song','mp3')
     this.loadAudio('songAltered','mp3')
-    this.loadImage('background')
 
+    this.loadImage('background')
     this.loadImage('grass_1')
     this.loadImage('grass_2')
     this.loadImage('tree')
     this.loadImage('title')
+    this.loadImage('ground')
+    this.loadImage('bridge_left')
+    this.loadImage('bridge_right')
+
+    this.loadPhysics('objects')
 
     this.loadCharacter('man')
 
