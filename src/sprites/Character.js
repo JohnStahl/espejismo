@@ -7,6 +7,11 @@ export default class extends Phaser.Sprite {
     this.body.fixedRotation = true
     this.addAnimations()
     this.state = {name:''}
+    this.stateMap = {}
+  }
+
+  addState(name,func) {
+    this.stateMap[name] = func
   }
 
   setCollisionGroup(cg) {
@@ -16,12 +21,13 @@ export default class extends Phaser.Sprite {
     this.cgs = cgs
   }
 
-  setState(name,func) {
+  setState(name,forced = false) {
     if(!this.isState(name)) {
-      if(this.state.done && !this.state.done()) {
+      if(!forced && this.state.done && !this.state.done()) {
         return
       }
       let newState = {name}
+      const func = this.stateMap[name]
       if (func != null) {
         if(false === func(newState)){
           return

@@ -73,6 +73,11 @@ export default class extends Phaser.State {
       this.pause()
     })
 
+    this.backspace = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
+    this.backspace.onDown.add(()=>{
+      this.reset()
+    })
+
     this.song1 = this.add.audio('song',0.5)
     this.song1.play()
     this.song2 = this.add.audio('songAltered',0.5)
@@ -95,12 +100,20 @@ export default class extends Phaser.State {
       this.player.moveRight()
     }
     if(stop) this.player.stop()
-    this.setCamera()
+    this.setStage()
   }
 
-  setCamera() {
-    this.camera.x =
-      Math.floor(this.player.x / this.camera.width) * this.camera.width
+  setStage() {
+    const stage = Math.floor(this.player.x / this.camera.width)
+    if(stage !== this.stageNum) {
+      this.camera.x = stage * this.camera.width
+      this.player.setStage(stage)
+      this.stageNum = stage
+    }
+  }
+
+  reset() {
+    this.player.reset()
   }
 
   pause() {

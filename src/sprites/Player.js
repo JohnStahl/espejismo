@@ -7,35 +7,18 @@ export default class extends Character {
     this.setState('stopped')
     this.moveVel = 200
     this.jumpMoveVel = 100
-  }
 
-  moveRight() {
-    this.setState('walk/right',(s)=>{
+    this.addState('stopped',()=>{
+      this.animations.stop(null, true)
+      this.body.setZeroVelocity()
+    })
+    this.addState('walk/right',(s)=>{
       this.animations.play('walk_right',24,true)
     })
-    if(this.isState('jump')) {
-      this.animations.frameName = 'walk_right/0001'
-      this.body.thrustRight(this.jumpMoveVel)
-    } else {
-      this.body.moveRight(this.moveVel)
-    }
-  }
-
-  moveLeft() {
-    if(this.leftEdge(5)) return
-    this.setState('walk/left',(s)=>{
+    this.addState('walk/left',(s)=>{
       this.animations.play('walk_left',24,true)
     })
-    if(this.isState('jump')) {
-      this.animations.frameName = 'walk_left/0001'
-      this.body.thrustLeft(this.jumpMoveVel)
-    } else {
-      this.body.moveLeft(this.moveVel)
-    }
-  }
-
-  jump() {
-    this.setState('jump',(s)=>{
+    this.addState('jump',(s)=>{
       if(!this.canJump()) return false;
       this.animations.stop(null,true)
       this.body.moveUp(250)
@@ -51,16 +34,39 @@ export default class extends Character {
     })
   }
 
+  moveRight() {
+    this.setState('walk/right')
+    if(this.isState('jump')) {
+      this.animations.frameName = 'walk_right/0001'
+      this.body.thrustRight(this.jumpMoveVel)
+    } else {
+      this.body.moveRight(this.moveVel)
+    }
+  }
+
+  moveLeft() {
+    if(this.leftEdge(5)) return
+    this.setState('walk/left')
+    if(this.isState('jump')) {
+      this.animations.frameName = 'walk_left/0001'
+      this.body.thrustLeft(this.jumpMoveVel)
+    } else {
+      this.body.moveLeft(this.moveVel)
+    }
+  }
+
+  jump() {
+    this.setState('jump')
+  }
+
+  stop() {
+    this.setState('stopped')
+  }
+
   isZero(num) {
     return Math.abs(num) < 4.0;
   }
 
-  stop() {
-    this.setState('stopped',()=>{
-      this.animations.stop(null, true)
-      this.body.setZeroVelocity()
-    })
-  }
 
   update() {
     super.update()
@@ -69,6 +75,31 @@ export default class extends Character {
         this.stop()
       }
       this.body.x = this.game.camera.x + 46
+    }
+
+    if(this.resetVelocity) {
+      this.body.velocity.x = this.saved.velocityX
+      this.body.velocity.y = this.saved.velocityY
+      this.resetVelocity = false
+    }
+  }
+
+  reset() {
+    this.body.x = this.saved.x
+    this.body.y = this.saved.y
+    this.resetVelocity = true
+    this.health = this.saved.health
+    this.setState(this.saved.state,true)
+  }
+
+  setStage(stage) {
+    this.saved = {
+      x: this.body.x,
+      y: this.body.y,
+      velocityX: this.body.velocity.x,
+      velocityY: this.body.velocity.y,
+      health: this.health,
+      state: this.state.name
     }
   }
 
