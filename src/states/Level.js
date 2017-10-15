@@ -94,7 +94,7 @@ export default class extends Game {
       this.state.restart()
       return
     }
-    if(this.player.body.x > this.game.world.width) {
+    if(this.player.left > this.game.world.width) {
       this.player.stop(true)
       this.fadeOut(()=>{
         this.state.start(this.nextLevel())
