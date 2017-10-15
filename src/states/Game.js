@@ -87,20 +87,31 @@ export default class extends Phaser.State {
   }
 
   update() {
-    let stop = this.player.isState('walk')
-    if(this.cursors.up.isDown) {
-      stop = false
-      this.player.jump()
-    }
-    if (this.cursors.left.isDown) {
-      stop = false
-      this.player.moveLeft()
-    } else if (this.cursors.right.isDown) {
-      stop = false
-      this.player.moveRight()
-    }
-    if(stop) this.player.stop()
     this.setStage()
+    let stop = this.player.isState('walk')
+    if(this.isStages(1,2,3)) {
+      if (this.cursors.up.isDown) {
+        stop = false
+        this.player.jump()
+      }
+    }
+    if(this.isStages(0,1,2,3)) {
+      if (this.cursors.left.isDown) {
+        stop = false
+        this.player.moveLeft()
+      } else if (this.cursors.right.isDown) {
+        stop = false
+        this.player.moveRight()
+      }
+      if(stop) this.player.stop()
+    }
+  }
+
+  isStages(...stages) {
+    for(let stage of stages) {
+      if(stage === this.stageNum) return true
+    }
+    return false
   }
 
   setStage() {
