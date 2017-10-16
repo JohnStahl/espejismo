@@ -80,7 +80,7 @@
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
-        <string></string>
+        <string>man.png</string>
         <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
@@ -150,7 +150,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>../../web/assets/animation/man.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -169,9 +169,9 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>prependSmartFolderName</key>
-        <false/>
+        <true/>
         <key>autodetectAnimations</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -198,9 +198,119 @@
             <false/>
         </struct>
         <key>individualSpriteSettings</key>
-        <map type="IndividualSpriteSettingsMap"/>
+        <map type="IndividualSpriteSettingsMap">
+            <key type="filename">jump_left/0001.png</key>
+            <key type="filename">jump_left/0002.png</key>
+            <key type="filename">jump_left/0003.png</key>
+            <key type="filename">jump_left/0004.png</key>
+            <key type="filename">jump_left/0005.png</key>
+            <key type="filename">jump_left/0006.png</key>
+            <key type="filename">jump_left/0007.png</key>
+            <key type="filename">jump_left/0008.png</key>
+            <key type="filename">jump_left/0009.png</key>
+            <key type="filename">jump_left/0010.png</key>
+            <key type="filename">jump_left/0011.png</key>
+            <key type="filename">jump_left/0012.png</key>
+            <key type="filename">jump_left/0013.png</key>
+            <key type="filename">jump_left/0014.png</key>
+            <key type="filename">jump_left/0015.png</key>
+            <key type="filename">jump_right/0001.png</key>
+            <key type="filename">jump_right/0002.png</key>
+            <key type="filename">jump_right/0003.png</key>
+            <key type="filename">jump_right/0004.png</key>
+            <key type="filename">jump_right/0005.png</key>
+            <key type="filename">jump_right/0006.png</key>
+            <key type="filename">jump_right/0007.png</key>
+            <key type="filename">jump_right/0008.png</key>
+            <key type="filename">jump_right/0009.png</key>
+            <key type="filename">jump_right/0010.png</key>
+            <key type="filename">jump_right/0011.png</key>
+            <key type="filename">jump_right/0012.png</key>
+            <key type="filename">jump_right/0013.png</key>
+            <key type="filename">jump_right/0014.png</key>
+            <key type="filename">jump_right/0015.png</key>
+            <key type="filename">land_left/0001.png</key>
+            <key type="filename">land_left/0002.png</key>
+            <key type="filename">land_left/0003.png</key>
+            <key type="filename">land_left/0004.png</key>
+            <key type="filename">land_left/0005.png</key>
+            <key type="filename">land_left/0006.png</key>
+            <key type="filename">land_left/0007.png</key>
+            <key type="filename">land_left/0008.png</key>
+            <key type="filename">land_right/0001.png</key>
+            <key type="filename">land_right/0002.png</key>
+            <key type="filename">land_right/0003.png</key>
+            <key type="filename">land_right/0004.png</key>
+            <key type="filename">land_right/0005.png</key>
+            <key type="filename">land_right/0006.png</key>
+            <key type="filename">land_right/0007.png</key>
+            <key type="filename">land_right/0008.png</key>
+            <key type="filename">walk_left/0011.png</key>
+            <key type="filename">walk_left/0012.png</key>
+            <key type="filename">walk_left/0013.png</key>
+            <key type="filename">walk_left/0014.png</key>
+            <key type="filename">walk_left/0015.png</key>
+            <key type="filename">walk_right/0011.png</key>
+            <key type="filename">walk_right/0012.png</key>
+            <key type="filename">walk_right/0013.png</key>
+            <key type="filename">walk_right/0014.png</key>
+            <key type="filename">walk_right/0015.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>35,46,70,93</rect>
+                <key>scale9Paddings</key>
+                <rect>35,46,70,93</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">land_right/0009.png</key>
+            <key type="filename">land_right/0010.png</key>
+            <key type="filename">walk_left/0001.png</key>
+            <key type="filename">walk_left/0002.png</key>
+            <key type="filename">walk_left/0003.png</key>
+            <key type="filename">walk_left/0004.png</key>
+            <key type="filename">walk_left/0005.png</key>
+            <key type="filename">walk_left/0006.png</key>
+            <key type="filename">walk_left/0007.png</key>
+            <key type="filename">walk_left/0008.png</key>
+            <key type="filename">walk_left/0009.png</key>
+            <key type="filename">walk_left/0010.png</key>
+            <key type="filename">walk_right/0001.png</key>
+            <key type="filename">walk_right/0002.png</key>
+            <key type="filename">walk_right/0003.png</key>
+            <key type="filename">walk_right/0004.png</key>
+            <key type="filename">walk_right/0005.png</key>
+            <key type="filename">walk_right/0006.png</key>
+            <key type="filename">walk_right/0007.png</key>
+            <key type="filename">walk_right/0008.png</key>
+            <key type="filename">walk_right/0009.png</key>
+            <key type="filename">walk_right/0010.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,36,50,73</rect>
+                <key>scale9Paddings</key>
+                <rect>25,36,50,73</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+        </map>
         <key>fileList</key>
-        <array/>
+        <array>
+            <filename>jump_left</filename>
+            <filename>jump_right</filename>
+            <filename>land_left</filename>
+            <filename>land_right</filename>
+            <filename>walk_left</filename>
+            <filename>walk_right</filename>
+        </array>
         <key>ignoreFileList</key>
         <array/>
         <key>replaceList</key>
