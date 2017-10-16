@@ -6,8 +6,8 @@ export default class extends Character {
     super(game,x,y,'man','walk_right/0001')
     this.initialY = y
     this.setState('stopped')
-    this.moveVel = 200
-    this.jumpMoveVel = 100
+    this.moveVel = 400
+    this.jumpMoveVel = 300
 
     this.addState('stopped',()=>{
       this.animations.stop(null, true)
@@ -22,7 +22,7 @@ export default class extends Character {
     this.addState('jump',(s)=>{
       if(!this.canJump()) return false;
       this.animations.stop(null,true)
-      this.body.moveUp(250)
+      this.body.moveUp(850)
       let jumpTime = this.game.time.now + 750
       s.done = ()=>{
         return this.game.time.now > jumpTime && this.canJump()
