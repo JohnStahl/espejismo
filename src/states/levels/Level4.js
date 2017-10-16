@@ -3,9 +3,14 @@ import Level from "../Level";
 export default class extends Level {
   nextLevel() { return 'Level5' }
 
+  groundLevel() {
+    return this.game.world.height - 18
+  }
+
   createObjects() {
-    this.createObject(300, -20, 'grass_2')
-    this.createObject(600, -20, 'grass_1')
+    this.createObject(300, 16, 'grass_2')
+    this.createObject(600, 20, 'grass_1')
+    this.createObject(512,0,'ground')
   }
 
   levelStart() {
