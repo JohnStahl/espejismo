@@ -10,6 +10,8 @@ export default class extends Level {
   createGround() {}
 
   createObjects() {
+    this.createObject(220,0,'bank_left')
+    this.createObject(-220,0,'bank_right')
     this.createObjectWithPhysics(0, 0, 'bridge_left')
     this.createObjectWithPhysics(-100, 0, 'bridge_right')
   }

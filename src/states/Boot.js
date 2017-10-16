@@ -32,6 +32,8 @@ export default class extends Phaser.State {
     this.loadImage('ground')
     this.loadImage('bridge_left')
     this.loadImage('bridge_right')
+    this.loadImage('bank_left')
+    this.loadImage('bank_right')
 
     this.loadPhysics('objects')
 

@@ -23,6 +23,7 @@ export default class extends Game {
     this.enemiesCG = this.newCG()
 
     this.createGround()
+    this.createObjects()
 
     this.player = new Player(this.game,10,this.groundLevel()-70)
     this.player.setCollisionGroup(this.playerCG)
@@ -31,8 +32,6 @@ export default class extends Game {
     this.player.events.onKilled.add(()=>{
       this.state.restart()
     })
-
-    this.createObjects()
 
     this.speechLine = this.game.add.graphics()
     this.speechLine.lineStyle(2,0x820900,1)
