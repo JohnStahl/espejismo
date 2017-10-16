@@ -8,6 +8,19 @@ export default class extends Phaser.Sprite {
     this.addAnimations()
     this.state = {name:''}
     this.stateMap = {}
+    this.groupCallbacks = []
+  }
+
+  isAnimations(...names) {
+    for(let name of names) {
+      if(name === this.animations.name) return true
+    }
+    return false
+  }
+
+  isAnimating() {
+    if(!this.animations.currentAnim) return false
+    return this.animations.currentAnim.isPlaying
   }
 
   addState(name,func) {
@@ -17,15 +30,25 @@ export default class extends Phaser.Sprite {
   setCollisionGroup(cg) {
     this.cg = cg
   }
+
   collides(cgs) {
     this.cgs = cgs
   }
 
+  createGroupCallback(group,cb) {
+    this.groupCallbacks.push([group,cb])
+  }
+
+  onAnimationComplete(func) {
+    this.animations.currentAnim.onComplete.addOnce(func)
+  }
+
   setState(name,forced = false) {
     if(!this.isState(name)) {
-      if(!forced && this.state.done && !this.state.done()) {
+      if(!forced && this.state.isDone && !this.state.isDone()) {
         return
       }
+      if(this.state.done) this.state.done()
       let newState = {name}
       const func = this.stateMap[name]
       if (func != null) {
@@ -41,6 +64,12 @@ export default class extends Phaser.Sprite {
     const cur = this.state.name
     return (cur.length === name.length || cur[name.length] === '/') &&
       cur.startsWith(name)
+  }
+
+  stopAnimation() {
+    if(this.isAnimating()) {
+      this.animations.currentAnim.stop(true,true)
+    }
   }
 
   addAnimations() {
@@ -72,6 +101,9 @@ export default class extends Phaser.Sprite {
     this.body.loadPolygon(this.key, this.frameName)
     if(this.cg) this.body.setCollisionGroup(this.cg)
     if(this.cgs) this.body.collides(this.cgs)
+    for(let cb of this.groupCallbacks) {
+      this.body.createGroupCallback(...cb)
+    }
   }
 
   canJump() {

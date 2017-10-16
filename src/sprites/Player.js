@@ -7,28 +7,65 @@ export default class extends Character {
     this.initialY = y
     this.setState('stopped')
     this.moveVel = 400
-    this.jumpMoveVel = 300
+    this.jumpHorVel = 500
+    this.jumpVel = 750
+    this.dir = 'right'
+    this.hold = false
 
     this.addState('stopped',()=>{
-      this.animations.stop(null, true)
+      this.stopAnimation()
       this.body.setZeroVelocity()
     })
     this.addState('walk/right',(s)=>{
+      this.stopAnimation()
       this.animations.play('walk_right',24,true)
+      s.update = ()=>{
+        this.body.moveRight(this.moveVel)
+      }
     })
     this.addState('walk/left',(s)=>{
+      this.stopAnimation()
       this.animations.play('walk_left',24,true)
+      s.update = ()=>{
+        this.body.moveLeft(this.moveVel)
+      }
     })
     this.addState('jump',(s)=>{
       if(!this.canJump()) return false;
-      this.animations.stop(null,true)
-      this.body.moveUp(850)
-      let jumpTime = this.game.time.now + 750
-      s.done = ()=>{
-        return this.game.time.now > jumpTime && this.canJump()
+      this.hold = true
+      this.stopAnimation()
+      this.body.setZeroVelocity()
+      this.animations.play(`jump_${this.dir}`,30,false)
+      this.onAnimationComplete(()=>{
+        this.hold = false
+      })
+      let jumpTime = this.game.time.now + 1000
+      s.isDone = ()=>{
+        return !this.isAnimating() && this.game.time.now > jumpTime && this.canJump()
+      }
+      s.done = ()=> {
+        this.animations.play(`land_${this.dir}`,30,false)
+        this.hold = true
+        this.onAnimationComplete(()=>{
+          this.hold = false
+        })
       }
       s.update = ()=>{
-        if(this.canJump()) {
+        if(this.isAnimating()) {
+          if(this.animations.frameName.match(/0010/)) {
+            if(this.canJump()) {
+              this.animations.currentAnim.speed = 120
+              this.body.moveUp(this.jumpVel)
+              if (this.dir === 'right')
+                this.body.moveRight(this.jumpHorVel)
+              else
+                this.body.moveLeft(this.jumpHorVel)
+            } else {
+              this.stopAnimation()
+            }
+          }
+        }
+        if(!this.isAnimating() && this.canJump()) {
           this.stop()
         }
       }
@@ -36,33 +73,27 @@ export default class extends Character {
   }
 
   moveRight() {
+    if(this.hold) return
     this.setState('walk/right')
-    if(this.isState('jump')) {
-      this.animations.frameName = 'walk_right/0001'
-      this.body.thrustRight(this.jumpMoveVel)
-    } else {
-      this.body.moveRight(this.moveVel)
-    }
+    this.dir = 'right'
   }
 
   moveLeft() {
     if(this.leftEdge(5)) return
+    if(this.hold) return
+    this.dir = 'left'
     this.setState('walk/left')
-    if(this.isState('jump')) {
-      this.animations.frameName = 'walk_left/0001'
-      this.body.thrustLeft(this.jumpMoveVel)
-    } else {
-      this.body.moveLeft(this.moveVel)
-    }
   }
 
   stopWalking() {
+    if(this.hold) return
     if(this.isState('walk')) {
       this.stop()
     }
   }
 
   jump() {
+    if(this.hold) return
     this.setState('jump')
   }
 
@@ -77,6 +108,21 @@ export default class extends Character {
         this.stop()
       }
       this.moveToEdge()
+    }
+    if(!this.isAnimating()) {
+      if(this.isState('jump')) {
+        if(this.dir === 'right') {
+          this.animations.frameName = 'land_right/0001'
+        } else {
+          this.animations.frameName = 'land_left/0001'
+        }
+      } else {
+        if(this.dir === 'right') {
+          this.animations.frameName = 'walk_right/0001'
+        } else {
+          this.animations.frameName = 'walk_left/0001'
+        }
+      }
     }
   }
 
