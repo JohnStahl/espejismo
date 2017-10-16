@@ -4,10 +4,21 @@ import { centerGameObjects } from '../utils'
 
 export default class extends Phaser.State {
   preload () {
+    WebFont.load({
+      google: {
+        families: ['Sancreek']
+      },
+      active: ()=>{this.fontsReady = true}
+    })
+    this.fontsReady = true
+
     var loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg')
     var loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
     centerGameObjects([loaderBg, loaderBar])
     this.load.setPreloadSprite(loaderBar)
+    this.load.onLoadComplete.addOnce( () => {
+      this.loadReady = true
+    });
 
     // Load assets
     this.loadAudio('song','mp3')
@@ -25,10 +36,12 @@ export default class extends Phaser.State {
     this.loadPhysics('objects')
 
     this.loadCharacter('man')
+  }
 
-    this.load.onLoadComplete.add( () => {
+  render() {
+    if(this.loadReady && this.fontsReady) {
       this.state.start('Splash')
-    });
+    }
   }
 
   loadImage(name,ext = 'png') {

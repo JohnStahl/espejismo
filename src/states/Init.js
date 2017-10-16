@@ -6,7 +6,7 @@ export default class extends Phaser.State {
   preload() {
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
-    this.load.onLoadComplete.add( () => {
+    this.load.onLoadComplete.addOnce( () => {
       this.state.start('Boot')
     });
   }
