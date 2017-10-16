@@ -38,7 +38,7 @@ export default class extends Game {
     this.speechLine.lineTo(15,-15)
     this.speechLine.visible = false
     this.speechText = this.game.add.text(
-      0,0,"", {font: `24px ${config.font}`, fill: '#820900'}
+      0,0,"", {font: `16px ${config.font}`, fill: '#820900'}
     )
     this.speechText.visible = false
 
@@ -174,7 +174,7 @@ export default class extends Game {
     this.speechText.text = text
     this.speechLine.visible = true
     this.speechText.visible = true
-    this.time.events.add(1400,()=>{
+    this.time.events.add(2000,()=>{
       this.speechLine.visible = false
       this.speechText.visible = false
       this.hold = false
