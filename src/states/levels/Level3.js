@@ -17,9 +17,9 @@ export default class extends Level {
   }
 
   levelStart() {
-    this.speak("What in the devil?",()=>{
+    this.speak("What in the devil?",{y:10},()=>{
       this.wait(1000,()=>{
-        this.speak("Stay.. stay away from me!")
+        this.speak("Stay away from me!",{x:-5,y:10})
       })
     })
   }

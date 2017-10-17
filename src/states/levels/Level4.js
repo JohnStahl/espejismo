@@ -18,8 +18,8 @@ export default class extends Level {
   }
 
   levelStart() {
-    this.speak("Not giving up eh?",()=>{
-      this.speak("Maybe a hit from my cane will change your mind!")
+    this.speak("Not giving up eh?",{y:10},()=>{
+      this.speak("Maybe my cane\nwill change\nyour mind!",{x: 20, y: -20})
     })
   }
 

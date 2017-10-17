@@ -4,6 +4,7 @@ import Player from '../sprites/Player'
 import Background from '../sprites/Background'
 import StaticObject from "../sprites/StaticObject";
 import Game from "./Game";
+import SpeechBubble from "../sprites/SpeechBubble";
 
 export default class extends Game {
   nextLevel() { return null }
@@ -36,17 +37,11 @@ export default class extends Game {
     this.player.collides([this.worldCG,this.enemiesCG])
     this.game.add.existing(this.player)
     this.player.events.onKilled.add(()=>{
-      this.state.restart()
+      this.reset()
     })
 
-    this.speechLine = this.game.add.graphics()
-    this.speechLine.lineStyle(2,0x820900,1)
-    this.speechLine.lineTo(15,-15)
-    this.speechLine.visible = false
-    this.speechText = this.game.add.text(
-      0,0,"", {font: `16px ${config.font}`, fill: '#820900'}
-    )
-    this.speechText.visible = false
+    this.speechBubble = new SpeechBubble(this.game,this.player)
+    this.game.add.existing(this.speechBubble)
 
     this.pauseText = this.game.add.text(
       this.camera.width/2, this.camera.height/2,
@@ -90,6 +85,11 @@ export default class extends Game {
     return body
   }
 
+  reset() {
+    this.isRetry = true
+    this.state.restart()
+  }
+
   levelStart() {
 
   }
@@ -97,12 +97,13 @@ export default class extends Game {
   update() {
     if(this.hold) return
     if(this.backspace.isDown) {
-      this.state.restart()
+      this.reset()
       return
     }
     if(this.player.left > this.game.world.width) {
       this.player.stop(true)
       this.fadeOut(()=>{
+        this.isRetry = false
         this.state.start(this.nextLevel())
       })
       return
@@ -165,24 +166,24 @@ export default class extends Game {
 
   wait(time,next) {
     this.hold = true
+    if(this.isRetry) time = time/2
     this.time.events.add(time,()=>{
       this.hold = false
       if(next) next()
     })
   }
 
-  speak(text,next) {
+  speak(text,offsets={},next) {
+    if(offsets instanceof Function) {
+      next = offsets
+      offsets = {}
+    }
     this.hold = true
-    this.speechLine.x = this.player.body.x + 20
-    this.speechLine.y = this.player.top
-    this.speechText.x = this.player.body.x + 20
-    this.speechText.y = this.player.top - 45
-    this.speechText.text = text
-    this.speechLine.visible = true
-    this.speechText.visible = true
-    this.time.events.add(2000,()=>{
-      this.speechLine.visible = false
-      this.speechText.visible = false
+    this.speechBubble.show(text,offsets)
+    let time = 4000
+    if(this.isRetry) time = 1000
+    this.time.events.add(time,()=>{
+      this.speechBubble.hide()
       this.hold = false
       if(next) next()
     })

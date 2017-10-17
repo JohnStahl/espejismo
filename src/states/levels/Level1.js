@@ -14,7 +14,7 @@ export default class extends Level {
   }
 
   levelStart() {
-    this.speak("I have to get out of here!")
+    this.speak("I have to get\nout of here!",{x:27,y:-10})
   }
 
   levelUpdate() {
