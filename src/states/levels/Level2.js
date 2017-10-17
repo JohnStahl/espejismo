@@ -21,7 +21,15 @@ export default class extends Level {
   }
 
   levelStart() {
-    this.speak("Guess I'll have to jump for it...")
+    this.speak("Wha? When did this happen?",()=>{
+      this.wait(2000,()=>{
+        this.speak("It's as if someone's trying to stop me...",()=>{
+          this.wait(1000,()=>{
+            this.speak("I'll just have to jump over to the other side")
+          })
+        })
+      })
+    })
   }
 
   levelUpdate() {
