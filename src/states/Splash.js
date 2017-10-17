@@ -8,12 +8,13 @@ export default class extends Game {
   create () {
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
-    this.game.add.sprite(0,0,"title") //not scaled properly
-    //this.game.scale.x =  game.camera.width / this.width
-    //this.game.scale.y =  game.camera.height / this.height
+    title = this.game.add.sprite(0,0,"title") 
+    
+    title.scale.x =  game.camera.width / title.width
+    title.scale.y =  game.camera.height / title.height
     
     let title = this.addText("Press Space to Start", `42px ${config.font}`, '#820900')
-    let controls = this.addText("movement: left/right arrow keys jump: up arrow", `30px ${config.font}`, '#820900') //just places text over title
+    let controls = this.addTextBelow(title, "Movement: left/right arrow keys\nJump: up arrow\nPause: space", `25px ${config.font}`, '#820900')
 
     this.game.song1 = this.add.audio('song',1,true)
     this.game.song2 = this.add.audio('songAltered',0,true)
