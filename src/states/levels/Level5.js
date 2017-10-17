@@ -3,6 +3,10 @@ import Level from "../Level";
 export default class extends Level {
   nextLevel() { return 'Level5' }
 
+  crossFade() {
+    return [0.5,0.3];
+  }
+
   groundLevel() {
     return this.game.world.height - 20
   }

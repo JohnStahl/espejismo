@@ -10,7 +10,13 @@ export default class extends Game {
 
   groundLevel() { return this.game.world.height }
 
+  crossFade() {
+    return [1,0]
+  }
+
   create() {
+    [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
+
     this.background = new Background(this.game)
     this.game.add.existing(this.background)
 

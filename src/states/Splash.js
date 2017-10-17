@@ -14,9 +14,11 @@ export default class extends Game {
     
     let title = this.addText("Press Space to Start", `42px ${config.font}`, '#820900')
     let controls = this.addText("movement: left/right arrow keys jump: up arrow", `30px ${config.font}`, '#820900') //just places text over title
-    
-    this.song1 = this.add.audio('song',0.5,true)
-    this.song1.play()
+
+    this.game.song1 = this.add.audio('song',1,true)
+    this.game.song2 = this.add.audio('songAltered',0,true)
+    this.game.song1.play()
+    this.game.song2.play()
   }
 
   addTextBelow(pos,content,font,color) {
