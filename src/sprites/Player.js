@@ -8,7 +8,7 @@ export default class extends Character {
     this.setState('stopped')
     this.moveVel = 400
     this.jumpHorVel = 500
-    this.jumpVel = 750
+    this.jumpVel = 900
     this.dir = 'right'
     this.hold = false
     this.leftEdgePos = this.game.camera.x
