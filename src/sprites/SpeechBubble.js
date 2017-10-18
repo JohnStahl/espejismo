@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import config from '../config'
 
 export default class extends Phaser.Sprite {
-  constructor(game,character) {
+  constructor(game,character,color='#E7D39E') {
     super(game,0,0,'speech_bubble')
     this.character = character
     this.visible = false
-    this.text = this.game.add.text(0,0,"",{font: `16px ${config.font}`, fill: '#E7D39E'})
+    this.text = this.game.add.text(0,0,"",{font: `16px ${config.font}`, fill: color})
   }
 
   show(text,offsets={}) {

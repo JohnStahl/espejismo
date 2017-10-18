@@ -11,6 +11,7 @@ export default class extends Character {
     this.jumpVel = 750
     this.dir = 'right'
     this.hold = false
+    this.leftEdgePos = this.game.camera.x
 
     this.addState('stopped',()=>{
       this.stopAnimation()
@@ -127,10 +128,11 @@ export default class extends Character {
   }
 
   moveToEdge() {
-    this.body.x = this.game.camera.x + 46
+    this.body.x = this.leftEdgePos + 46
   }
 
   leftEdge(fudge = 0) {
-    return this.body.x - (46+fudge) < this.game.camera.x
+    return this.body.x - (46+fudge) < this.leftEdgePos
   }
+
 }

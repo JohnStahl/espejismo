@@ -15,10 +15,18 @@ export default class extends Game {
     return [1,0]
   }
 
+  playerStart() {
+    return 10
+  }
+
+  backgroundImg() {
+    return 'background'
+  }
+
   create() {
     [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
 
-    this.background = new Background(this.game)
+    this.background = new Background(this.game,this.backgroundImg())
     this.game.add.existing(this.background)
 
     this.physics.startSystem(Phaser.Physics.P2JS);
@@ -32,13 +40,15 @@ export default class extends Game {
     this.createGround()
     this.createObjects()
 
-    this.player = new Player(this.game,10,this.groundLevel()-70)
+    this.player = new Player(this.game,this.playerStart(),this.groundLevel()-70)
     this.player.setCollisionGroup(this.playerCG)
     this.player.collides([this.worldCG,this.enemiesCG])
     this.game.add.existing(this.player)
     this.player.events.onKilled.add(()=>{
       this.reset()
     })
+
+    this.createAbove()
 
     this.speechBubble = new SpeechBubble(this.game,this.player)
     this.game.add.existing(this.speechBubble)
@@ -70,6 +80,7 @@ export default class extends Game {
   }
 
   createObjects() {}
+  createAbove() {}
 
   createGround() {
     this.addGround(0,this.game.world.width)
@@ -173,17 +184,19 @@ export default class extends Game {
     })
   }
 
-  speak(text,offsets={},next) {
-    if(offsets instanceof Function) {
-      next = offsets
-      offsets = {}
+  speak(text,opts={},next) {
+    if(opts instanceof Function) {
+      next = opts
+      opts = {}
     }
     this.hold = true
-    this.speechBubble.show(text,offsets)
+    let bubble = this.speechBubble
+    if(opts.bubble) bubble = opts.bubble
+    bubble.show(text,opts)
     let time = 4000
     if(this.isRetry) time = 1000
     this.time.events.add(time,()=>{
-      this.speechBubble.hide()
+      bubble.hide()
       this.hold = false
       if(next) next()
     })
