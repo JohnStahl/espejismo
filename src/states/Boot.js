@@ -46,11 +46,16 @@ export default class extends Phaser.State {
     this.loadImage('forest_ground')
     this.loadImage('forest_background')
     this.loadImage('forest_midground')
+    this.loadImage('cornfield_ground')
+    this.loadImage('cornfield_background')
+    this.loadImage('cornfield_midground')
+    this.loadImage('scarecrow_post')
 
     this.loadPhysics('objects')
 
     this.loadCharacter('man')
     this.loadCharacter('thistle_monster')
+    this.loadCharacter('scarecrow')
   }
 
   render() {

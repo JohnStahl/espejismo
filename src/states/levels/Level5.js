@@ -11,6 +11,10 @@ export default class extends Level {
     return this.game.world.height - 20
   }
 
+  createAbove() {
+    this.player.swordMode = true
+  }
+
   createObjects() {
     this.createObject(-360, -100, 'tree')
     this.createObject(512,0,'ground')

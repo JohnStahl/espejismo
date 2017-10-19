@@ -175,6 +175,15 @@ export default class extends Game {
     return this.game.physics.p2.createCollisionGroup();
   }
 
+  forceWait(time,next) {
+    this.hold = true
+    this.time.events.add(time,()=>{
+      this.hold = false
+      if(next) next()
+    })
+
+  }
+
   wait(time,next) {
     this.hold = true
     if(this.isRetry) time = time/2

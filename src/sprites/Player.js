@@ -12,6 +12,25 @@ export default class extends Character {
     this.dir = 'right'
     this.hold = false
     this.leftEdgePos = this.game.camera.x
+    this.swordMode =false
+    this.outOfBoundsKill = false
+
+    this.addState('sword_mode',(s)=>{
+      this.animations.play('cane_sword',24)
+      this.hold = true
+      s.isDone = ()=>{
+        return !this.isAnimating()
+      }
+
+      s.update = ()=>{
+        if(!this.isAnimating()) {
+          this.swordMode = true
+          this.hold = false
+          this.animations.currentAnim = this.animations.getAnimation('sword_walk_right')
+          this.setState('stopped')
+        }
+      }
+    })
 
     this.addState('stopped',()=>{
       this.stopAnimation()
@@ -19,14 +38,14 @@ export default class extends Character {
     })
     this.addState('walk/right',(s)=>{
       this.stopAnimation()
-      this.animations.play('walk_right',24,true)
+      this.animations.play(this.walkAnim('right'),24,true)
       s.update = ()=>{
         this.body.moveRight(this.moveVel)
       }
     })
     this.addState('walk/left',(s)=>{
       this.stopAnimation()
-      this.animations.play('walk_left',24,true)
+      this.animations.play(this.walkAnim('left'),24,true)
       s.update = ()=>{
         this.body.moveLeft(this.moveVel)
       }
@@ -36,7 +55,7 @@ export default class extends Character {
       this.hold = true
       this.stopAnimation()
       this.body.setZeroVelocity()
-      this.animations.play(`jump_${this.dir}`,30,false)
+      this.animations.play(this.jumpAnim(),30,false)
       this.onAnimationComplete(()=>{
         this.hold = false
       })
@@ -45,7 +64,7 @@ export default class extends Character {
         return !this.isAnimating() && this.game.time.now > jumpTime && this.canJump()
       }
       s.done = ()=> {
-        this.animations.play(`land_${this.dir}`,30,false)
+        this.animations.play(this.landAnim(),30,false)
         this.hold = true
         this.onAnimationComplete(()=>{
           this.hold = false
@@ -73,6 +92,30 @@ export default class extends Character {
     })
   }
 
+  walkAnim(dir = this.dir) {
+    if(this.swordMode) {
+      return `sword_walk_${dir}`
+    } else {
+      return `walk_${dir}`
+    }
+  }
+
+  jumpAnim(dir = this.dir) {
+    if(this.swordMode) {
+      return `lunge_${dir}`
+    } else {
+      return `jump_${dir}`
+    }
+  }
+
+  landAnim(dir = this.dir) {
+    if(this.swordMode) {
+      return `lunge_land_${dir}`
+    } else {
+      return `land_${dir}`
+    }
+  }
+
   moveRight() {
     if(this.hold) return
     this.setState('walk/right')
@@ -98,6 +141,10 @@ export default class extends Character {
     this.setState('jump')
   }
 
+  enableSwordMode() {
+    this.setState('sword_mode')
+  }
+
   stop(force = false) {
     this.setState('stopped',force)
   }
@@ -112,17 +159,9 @@ export default class extends Character {
     }
     if(!this.isAnimating()) {
       if(this.isState('jump')) {
-        if(this.dir === 'right') {
-          this.animations.frameName = 'land_right/0001'
-        } else {
-          this.animations.frameName = 'land_left/0001'
-        }
+        this.animations.frameName = `${this.landAnim()}/0001`
       } else {
-        if(this.dir === 'right') {
-          this.animations.frameName = 'walk_right/0001'
-        } else {
-          this.animations.frameName = 'walk_left/0001'
-        }
+        this.animations.frameName = `${this.walkAnim()}/0001`
       }
     }
   }
