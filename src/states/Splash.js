@@ -13,6 +13,7 @@ export default class extends Game {
     title.scale.y =  game.camera.height / title.height
     
     let title = this.addText("Press Space to Start", `42px ${config.font}`, '#820900')
+    let controls = this.addTextBelow(title, "Movement: left/right arrow keys\nJump/Attack: up arrow\nPause: space", `25px ${config.font}`, '#820900')
 
     this.createFade()
     this.fadeIn()
