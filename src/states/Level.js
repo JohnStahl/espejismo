@@ -31,6 +31,7 @@ export default class extends Game {
     this.game.add.existing(this.background)
 
     this.physics.startSystem(Phaser.Physics.P2JS);
+    this.game.physics.p2.useElapsedTime = true
     this.game.physics.p2.applyGravity = true
     this.game.physics.p2.gravity.y = 3000
 
