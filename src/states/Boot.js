@@ -56,6 +56,7 @@ export default class extends Phaser.State {
     this.loadImage('arrow_down')
     this.loadImage('arrow_left')
     this.loadImage('arrow_right')
+    this.loadImage('dragon')
 
     this.loadPhysics('objects')
 

@@ -25,7 +25,7 @@ export default class extends Game {
   }
 
   create() {
-    // [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
+    [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
 
     this.background = new Background(this.game,this.backgroundImg())
     this.game.add.existing(this.background)
@@ -106,10 +106,16 @@ export default class extends Game {
 
   }
 
-  changeLevel() {
+  changeLevel(wait=null) {
     this.fadeOut(()=>{
       this.isRetry = false
-      this.state.start(this.nextLevel())
+      if(wait) {
+        this.wait(wait,()=>{
+          this.state.start(this.nextLevel())
+        })
+      } else {
+        this.state.start(this.nextLevel())
+      }
     })
   }
 

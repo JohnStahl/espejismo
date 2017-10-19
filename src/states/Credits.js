@@ -5,7 +5,7 @@ import config from "../config";
 export default class extends Game {
   create() {
     this.stage.backgroundColor = '#000000'
-    let title = this.addText("El Espejism", `42px ${config.font}`, '#E7D39E')
+    let title = this.addText("El Espejism", `42px ${config.font}`, '#E7D39E',{y: 200})
 
     let contributers = [
       'Matt Edlefsen',

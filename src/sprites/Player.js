@@ -95,7 +95,7 @@ export default class extends Character {
     })
     this.addState('collapse',()=>{
       this.disablePhysics()
-      this.animations.play('collapse',24)
+      this.animations.play('collapse',14)
     })
 
     this.addState('wake',(s)=>{

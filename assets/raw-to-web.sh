@@ -18,6 +18,7 @@ convert-width() {
   resize "$1" "$(calc-width "$1")" "$2"
 }
 
+resize objects/raw/Espejismo.gif 1024 title.png
 resize objects/raw/bridge/left_brokenBridge.png 745 bridge_left.png
 resize objects/raw/bridge/right_brokenBridge.png 650 bridge_right.png
 resize objects/raw/bridge/left_bank.png x576 bank_left.png
@@ -50,6 +51,8 @@ resize objects/raw/arrows/arrowUp.png 32 arrow_up.png
 resize objects/raw/arrows/arrowDown.png 32 arrow_down.png
 resize objects/raw/arrows/arrowLeft.png 32 arrow_left.png
 resize objects/raw/arrows/arrowRight.png 32 arrow_right.png
+
+resize dragon/dragon.png x800 dragon.png
 
 ffmpeg -y -t 19 -i audio/'Maria-Luiza Original.wav' -acodec libmp3lame ../web/assets/audio/song.mp3
 ffmpeg -y -t 19 -i audio/'Maria-Luiza Altered.wav' -acodec libmp3lame ../web/assets/audio/songAltered.mp3
