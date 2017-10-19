@@ -204,5 +204,4 @@ export default class extends Character {
   leftEdge(fudge = 0) {
     return this.body.x - (46+fudge) < this.leftEdgePos
   }
-
 }

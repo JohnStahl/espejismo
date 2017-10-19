@@ -25,7 +25,7 @@ export default class extends Game {
   }
 
   create() {
-    [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
+    // [this.game.song1.volume, this.game.song2.volume] = this.crossFade()
 
     this.background = new Background(this.game,this.backgroundImg())
     this.game.add.existing(this.background)
