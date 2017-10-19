@@ -9,23 +9,13 @@ export default class extends Character {
     this.xMax = x.max
     this.body.static = true
     this.body.clearShapes()
-    // let damageTimeout = 0
+
     this.body.onBeginContact.add((body)=>{
       if(body.sprite && body.sprite instanceof Player) {
+        this.game.playRandSound('hit')
         body.sprite.kill()
       }
     })
-    //     if (this.game.time.now > damageTimeout) {
-    //       body.sprite.damage(20)
-    //       if(body.x < this.body.x) {
-    //         body.moveLeft(400)
-    //       } else {
-    //         body.moveRight(400)
-    //       }
-    //       damageTimeout = this.game.time.now + 1000
-    //     }
-    //   }
-    // })
 
     this.addState('stopped',s=>{
       this.body.setZeroVelocity()

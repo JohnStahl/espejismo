@@ -44,6 +44,7 @@ export default class extends Character {
 
     this.addState('hit',s=>{
       this.animations.play('move/right',24)
+      this.game.playRandSound('hit')
       this.body.moveUp(600)
       this.body.moveRight(300)
       let hitTime = this.game.time.now + 1000
@@ -89,6 +90,7 @@ export default class extends Character {
       s.update = ()=>{
         if(this.animations.currentAnim.frame > 13) {
           if(this.canHit()) {
+            this.game.playRandSound('hit')
             this.player.kill()
           }
         }

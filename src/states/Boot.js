@@ -20,10 +20,18 @@ export default class extends Phaser.State {
       this.loadReady = true
     });
 
+    this.game.playRandSound = (name,volume)=>{
+      if(volume == null) volume = 0.5
+      const clip = this.game.rnd.between(1,this.game.audioNumClips[name])
+      let audio = this.game.sound.play(name+clip,volume)
+    }
+
+
     // Load assets
     this.loadAudio('song','mp3')
     this.loadAudio('songAltered','mp3')
     this.loadAudio('thunder','mp3')
+    this.loadAudioGroup('hit',5)
 
     this.loadImage('daughter')
     this.loadImage('background')
@@ -83,6 +91,17 @@ export default class extends Phaser.State {
   loadAudio(name,ext = 'wav') {
     this.load.audio(name,`./assets/audio/${name}.${ext}`)
   }
+
+  loadAudioGroup(name,num,ext = 'wav') {
+    if(this.game.audioNumClips == null) {
+      this.game.audioNumClips = {}
+    }
+    this.game.audioNumClips[name] = num
+    for(let i = 1;i <= num; ++i) {
+      this.load.audio(name+i,`./assets/audio/${name}_${i}.${ext}`)
+    }
+  }
+
 
   loadCharacter(name) {
     this.loadSprite(name)
