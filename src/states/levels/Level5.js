@@ -64,8 +64,11 @@ export default class extends Level {
           })
         })
         this.flashTween.yoyo(true)
-        this.wait(500,()=>{
-          this.flashTween.start()
+        this.forceWait(500,()=>{
+          this.sound.play('thunder',0.5)
+          this.forceWait(100,()=>{
+            this.flashTween.start()
+          })
         })
       }
     }

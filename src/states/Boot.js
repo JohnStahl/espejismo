@@ -23,6 +23,7 @@ export default class extends Phaser.State {
     // Load assets
     this.loadAudio('song','mp3')
     this.loadAudio('songAltered','mp3')
+    this.loadAudio('thunder','mp3')
 
     this.loadImage('daughter')
     this.loadImage('background')
