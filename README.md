@@ -11,3 +11,4 @@ Based on [phaser-es6-webpack](https://github.com/lean/phaser-es6-webpack) starte
  * [George Barrett](https://github.com/nefariousdeeds)
  * Alex Cole
  * [John Stahl](https://github.com/JohnStahl)
+ * Philip Vasta
