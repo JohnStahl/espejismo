@@ -105,6 +105,9 @@ export default class extends Character {
 
   update() {
     super.update()
+    if(this.body.x + 105 > this.game.world.width) {
+      this.body.x = this.game.world.width - 100
+    }
   }
 
   updatePhysics() {
