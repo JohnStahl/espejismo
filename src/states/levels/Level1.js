@@ -35,13 +35,13 @@ export default class extends Level {
     super.update()
     if(this.walkPlayer) {
       this.player.moveRight()
-      this.daughter.body.moveRight(145)
+      this.daughter.body.moveRight(180)
     }
   }
 
   levelStart() {
     this.daughterSpeak("Papa, stop,\nYou aren't well!",{x:20,y:-10},()=>{
-      this.speak("Get off of me!",{x:27},()=>{
+      this.speak("Let go of me!",{x:25},()=>{
         this.walkPlayer = true
         this.forceWait(1500,()=>{
           this.walkPlayer = false
