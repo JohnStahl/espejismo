@@ -10,11 +10,15 @@ export default class extends Level {
   }
 
   groundLevel() {
-    return this.game.world.height -30
+    return this.game.world.height -60
   }
 
   backgroundImg() {
     return 'night_background'
+  }
+
+  createGround() {
+    this.addGround(0,500)
   }
 
   createObjects() {

@@ -42,7 +42,7 @@ export default class extends Game {
     this.createGround()
     this.createObjects()
 
-    this.player = new Player(this.game,this.playerStart(),this.groundLevel()-70)
+    this.player = new Player(this.game,this.playerStart(),this.groundLevel()-80)
     this.player.setCollisionGroup(this.playerCG)
     this.player.collides([this.worldCG,this.enemiesCG])
     this.game.add.existing(this.player)
