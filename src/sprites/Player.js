@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import Character from './Character'
 
 export default class extends Character {
-  constructor(game,x,y) {
+  constructor(game,x,y,health = 100) {
     super(game,x,y,'man','walk_right/0001')
     this.initialY = y
     this.setState('stopped')
@@ -11,6 +11,8 @@ export default class extends Character {
     this.jumpVel = 900
     this.dir = 'right'
     this.hold = false
+    this.health = health
+    this.maxHealth = 100
     this.leftEdgePos = this.game.camera.x
     this.swordMode =false
     this.outOfBoundsKill = false

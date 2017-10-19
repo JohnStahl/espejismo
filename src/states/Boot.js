@@ -32,6 +32,7 @@ export default class extends Phaser.State {
     this.loadImage('house_upper_path')
     this.loadImage('lamppost')
     this.loadImage('speech_bubble')
+    this.loadImage('heart')
     this.loadImage('grass_1')
     this.loadImage('grass_2')
     this.loadImage('tree')

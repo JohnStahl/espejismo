@@ -13,6 +13,7 @@ export default class extends Level {
 
   createAbove() {
     this.player.swordMode = true
+    this.createPlayerHealthBar()
   }
 
   createObjects() {

@@ -5,6 +5,7 @@ import Background from '../sprites/Background'
 import StaticObject from "../sprites/StaticObject";
 import Game from "./Game";
 import SpeechBubble from "../sprites/SpeechBubble";
+import HealthBar from "../sprites/HealthBar";
 
 export default class extends Game {
   nextLevel() { return null }
@@ -159,6 +160,13 @@ export default class extends Game {
     obj.body.setCollisionGroup(this.worldCG)
     obj.body.collides([this.playerCG,this.enemiesCG])
     return obj
+  }
+
+  createPlayerHealthBar() {
+    this.healthBar = new HealthBar(this.game,this.player)
+    this.healthBar.x = 10
+    this.healthBar.y = 15
+    this.add.existing(this.healthBar)
   }
 
   pause() {
