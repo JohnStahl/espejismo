@@ -256,6 +256,68 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">collapse/0001.png</key>
+            <key type="filename">collapse/0002.png</key>
+            <key type="filename">collapse/0003.png</key>
+            <key type="filename">collapse/0004.png</key>
+            <key type="filename">collapse/0005.png</key>
+            <key type="filename">collapse/0006.png</key>
+            <key type="filename">collapse/0007.png</key>
+            <key type="filename">collapse/0008.png</key>
+            <key type="filename">collapse/0009.png</key>
+            <key type="filename">collapse/0010.png</key>
+            <key type="filename">collapse/0011.png</key>
+            <key type="filename">collapse/0012.png</key>
+            <key type="filename">collapse/0013.png</key>
+            <key type="filename">collapse/0014.png</key>
+            <key type="filename">collapse/0015.png</key>
+            <key type="filename">collapse/0016.png</key>
+            <key type="filename">collapse/0017.png</key>
+            <key type="filename">collapse/0018.png</key>
+            <key type="filename">collapse/0019.png</key>
+            <key type="filename">collapse/0020.png</key>
+            <key type="filename">wake/0001.png</key>
+            <key type="filename">wake/0002.png</key>
+            <key type="filename">wake/0003.png</key>
+            <key type="filename">wake/0004.png</key>
+            <key type="filename">wake/0005.png</key>
+            <key type="filename">wake/0006.png</key>
+            <key type="filename">wake/0007.png</key>
+            <key type="filename">wake/0008.png</key>
+            <key type="filename">wake/0009.png</key>
+            <key type="filename">wake/0010.png</key>
+            <key type="filename">wake/0011.png</key>
+            <key type="filename">wake/0012.png</key>
+            <key type="filename">wake/0013.png</key>
+            <key type="filename">wake/0014.png</key>
+            <key type="filename">wake/0015.png</key>
+            <key type="filename">wake/0016.png</key>
+            <key type="filename">wake/0017.png</key>
+            <key type="filename">wake/0018.png</key>
+            <key type="filename">wake/0019.png</key>
+            <key type="filename">wake/0020.png</key>
+            <key type="filename">wake/0021.png</key>
+            <key type="filename">wake/0022.png</key>
+            <key type="filename">wake/0023.png</key>
+            <key type="filename">wake/0024.png</key>
+            <key type="filename">wake/0025.png</key>
+            <key type="filename">wake/0026.png</key>
+            <key type="filename">wake/0027.png</key>
+            <key type="filename">wake/0028.png</key>
+            <key type="filename">wake/0029.png</key>
+            <key type="filename">wake/0030.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,46,150,93</rect>
+                <key>scale9Paddings</key>
+                <rect>75,46,150,93</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">jump_left/0001.png</key>
             <key type="filename">jump_left/0002.png</key>
             <key type="filename">jump_left/0003.png</key>
@@ -432,6 +494,8 @@
             <filename>lunge_right</filename>
             <filename>lunge_land_left</filename>
             <filename>lunge_land_right</filename>
+            <filename>collapse</filename>
+            <filename>wake</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

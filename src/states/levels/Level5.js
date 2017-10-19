@@ -1,7 +1,7 @@
 import Level from "../Level";
 
 export default class extends Level {
-  nextLevel() { return 'Level5' }
+  nextLevel() { return 'Level6' }
 
   crossFade() {
     return [0.5,0.3];
@@ -24,8 +24,15 @@ export default class extends Level {
   levelStart() {
     this.wait(2500,()=>{
       this.speak("I should have\nknown you were\nbehind this...",{x:18,y:-20},()=>{
-        this.wait(2000,()=>{
-          this.speak("This is the\nlast time you\ncross me\nold friend!",{x:35,y:-30})
+        this.player.moveRight()
+        this.forceWait(1000,()=>{
+          this.player.stop()
+          console.log(this.player.x)
+          this.wait(1000,()=>{
+            this.speak("This is the\nlast time you\ncross me\nold friend!",{x:35,y:-30},()=>{
+              this.player.collapse()
+            })
+          })
         })
       })
     })

@@ -12,6 +12,8 @@ import Level4 from './states/levels/Level4'
 import Level5 from './states/levels/Level5'
 
 import config from './config'
+import Level6 from "./states/levels/Level6";
+import Credits from "./states/Credits";
 
 class Game extends Phaser.Game {
   constructor () {
@@ -29,6 +31,8 @@ class Game extends Phaser.Game {
     this.state.add('Level3', Level3, false)
     this.state.add('Level4', Level4, false)
     this.state.add('Level5', Level5, false)
+    this.state.add('Level6', Level6, false)
+    this.state.add('Credits', Credits, false)
 
     this.state.start('Init')
   }

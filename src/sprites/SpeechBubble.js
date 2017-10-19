@@ -9,15 +9,20 @@ export default class extends Phaser.Sprite {
     this.text = this.game.add.text(0,0,"",{font: `16px ${config.font}`, fill: color})
   }
 
-  show(text,offsets={}) {
+  show(text,opts={}) {
     this.bringToTop()
     this.text.bringToTop()
-    this.x = this.character.body.x + 40
-    this.y = this.character.top - 110
+    this.x = this.character.body.x + 20
+    this.y = this.character.top - 130
     this.text.x = this.x + 45
-    if(offsets.x) this.text.x += offsets.x
+    if(opts.x) this.text.x += opts.x
     this.text.y = this.y + 55
-    if(offsets.y) this.text.y += offsets.y
+    if(opts.y) this.text.y += opts.y
+    if(opts.size) {
+      this.text.fontSize = opts.size
+    } else {
+      this.text.fontSize = 16
+    }
     this.text.text = text
     this.visible = true
     this.text.visible = true

@@ -106,6 +106,13 @@ export default class extends Game {
 
   }
 
+  changeLevel() {
+    this.fadeOut(()=>{
+      this.isRetry = false
+      this.state.start(this.nextLevel())
+    })
+  }
+
   update() {
     if(this.hold) return
     if(this.backspace.isDown) {
@@ -114,10 +121,7 @@ export default class extends Game {
     }
     if(this.player.left > this.game.world.width) {
       this.player.stop(true)
-      this.fadeOut(()=>{
-        this.isRetry = false
-        this.state.start(this.nextLevel())
-      })
+      this.changeLevel()
       return
     }
     if(this.player.body.y > this.game.world.height) {
@@ -167,6 +171,17 @@ export default class extends Game {
     this.healthBar.x = 10
     this.healthBar.y = 15
     this.add.existing(this.healthBar)
+  }
+
+  createDaughter(x,y) {
+    this.daughter = this.createObject(x,y,'daughter')
+    this.daughterBubble = new SpeechBubble(this.game,this.daughter,'#344f82')
+    this.add.existing(this.daughterBubble)
+  }
+
+  daughterSpeak(text,opts,f) {
+    opts.bubble = this.daughterBubble
+    this.speak(text,opts,f)
   }
 
   pause() {

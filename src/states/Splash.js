@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 
 import config from '../config'
-import { centerGameObjects } from '../utils'
 import Game from "./Game";
 
 export default class extends Game {
@@ -16,30 +15,8 @@ export default class extends Game {
     let title = this.addText("Press Space to Start", `42px ${config.font}`, '#820900')
     let controls = this.addTextBelow(title, "Movement: left/right arrow keys\nJump: up arrow\nPause: space", `25px ${config.font}`, '#820900')
 
-    this.game.song1 = this.add.audio('song',1,true)
-    this.game.song2 = this.add.audio('songAltered',0,true)
-    this.game.song1.play()
-    this.game.song2.play()
-  }
-
-  addTextBelow(pos,content,font,color) {
-    let text = this.addText(content,font,color)
-    text.alignTo(pos, Phaser.BOTTOM_CENTER)
-    return text;
-  }
-
-  addTextAbove(pos,content,font,color) {
-    let text = this.addText(content,font,color)
-    text.alignTo(pos, Phaser.TOP_CENTER)
-    return text;
-  }
-
-  addText(content,font,color) {
-    let text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, content, {'font': font, fill: color} );
-    text.padding.set(20,0)
-    text.dirty = true
-    centerGameObjects([text])
-    return text;
+    this.createFade()
+    this.fadeIn()
   }
 
   update () {

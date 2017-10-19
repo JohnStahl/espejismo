@@ -13,6 +13,7 @@ export default class extends Character {
     this.hold = false
     this.health = health
     this.maxHealth = 100
+    this.checkEdge = true
     this.leftEdgePos = this.game.camera.x
     this.swordMode =false
     this.outOfBoundsKill = false
@@ -92,6 +93,21 @@ export default class extends Character {
         }
       }
     })
+    this.addState('collapse',()=>{
+      this.disablePhysics()
+      this.animations.play('collapse',24)
+    })
+
+    this.addState('wake',(s)=>{
+      this.disablePhysics()
+      this.animations.play('wake',14)
+      let turnTimer = this.game.time.now + 3000
+      s.update = ()=>{
+        if(this.game.time.now > turnTimer) {
+          this.animations.frameName = 'walk_left/0001'
+        }
+      }
+    })
   }
 
   walkAnim(dir = this.dir) {
@@ -151,15 +167,28 @@ export default class extends Character {
     this.setState('stopped',force)
   }
 
+  collapse() {
+    this.setState('collapse')
+  }
+
+  collapsed() {
+    this.disablePhysics()
+    this.animations.frameName = 'wake/0001'
+  }
+
+  wake() {
+    this.setState('wake')
+  }
+
   update() {
     super.update()
-    if(this.leftEdge()) {
+    if(this.checkEdge && this.leftEdge()) {
       if (this.isState('walk/left')) {
         this.stop()
       }
       this.moveToEdge()
     }
-    if(!this.isAnimating()) {
+    if(!this.isAnimating() && !this.physicsDisabled) {
       if(this.isState('jump')) {
         this.animations.frameName = `${this.landAnim()}/0001`
       } else {

@@ -21,10 +21,7 @@ export default class extends Character {
       this.game.add.tween(this.body).to({angle: 90}).start()
       s.update = ()=>{
         if(this.angle === 90 && Math.round(this.body.velocity.y) === 0) {
-          this.body.setZeroVelocity()
-          this.body.clearShapes()
-          this.body.static = true
-          this.awakened = false
+          this.disablePhysics()
           this.setState('dead')
         }
       }

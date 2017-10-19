@@ -62,6 +62,10 @@ export default class extends Phaser.State {
 
   render() {
     if(this.loadReady && this.fontsReady) {
+      this.game.song1 = this.add.audio('song',1,true)
+      this.game.song2 = this.add.audio('songAltered',0,true)
+      this.game.song1.play()
+      this.game.song2.play()
       this.state.start('Splash')
     }
   }

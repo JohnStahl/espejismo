@@ -1,5 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
+import { centerGameObjects } from '../utils'
 
 export default class extends Phaser.State {
   createFade() {
@@ -32,5 +33,25 @@ export default class extends Phaser.State {
       if(next) next()
     })
     this.fadeOutTween.start()
+  }
+
+  addTextBelow(pos,content,font,color) {
+    let text = this.addText(content,font,color)
+    text.alignTo(pos, Phaser.BOTTOM_CENTER)
+    return text;
+  }
+
+  addTextAbove(pos,content,font,color) {
+    let text = this.addText(content,font,color)
+    text.alignTo(pos, Phaser.TOP_CENTER)
+    return text;
+  }
+
+  addText(content,font,color) {
+    let text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, content, {'font': font, fill: color} );
+    text.padding.set(20,0)
+    text.dirty = true
+    centerGameObjects([text])
+    return text;
   }
 }

@@ -22,16 +22,9 @@ export default class extends Level {
   }
 
   createAbove(){
-    this.daughter = this.createObject(215,33,'daughter')
-    this.daughterBubble = new SpeechBubble(this.game,this.daughter,'#344f82')
-    this.add.existing(this.daughterBubble)
+    this.createDaughter(215,33)
     this.createObject(260,30,'house')
     this.createObject(800,30,'lamppost')
-  }
-
-  daughterSpeak(text,opts,f) {
-    opts.bubble = this.daughterBubble
-    this.speak(text,opts,f)
   }
 
   update() {

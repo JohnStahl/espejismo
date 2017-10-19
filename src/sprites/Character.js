@@ -89,8 +89,17 @@ export default class extends Phaser.Sprite {
     }
   }
 
+  disablePhysics() {
+    this.body.setZeroVelocity()
+    this.body.clearShapes()
+    this.body.static = true
+    this.physicsDisabled = true
+  }
+
   update() {
-    this.updatePhysics()
+    if(!this.physicsDisabled) {
+      this.updatePhysics()
+    }
     if(this.state.update) {
       this.state.update()
     }
