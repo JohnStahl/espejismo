@@ -6,11 +6,11 @@ export default class extends Level {
   nextLevel() { return 'Level2' }
 
   playerStart() {
-    return 240
+    return 280
   }
 
   groundLevel() {
-    return this.game.world.height -60
+    return this.game.world.height -30
   }
 
   backgroundImg() {
@@ -18,8 +18,7 @@ export default class extends Level {
   }
 
   createObjects() {
-    this.createObject(512,0,'house_path')
-    this.createObject(650,75,'house_upper_path')
+    this.createObjectWithPhysics(512,0,'house_path')
   }
 
   createAbove(){
@@ -39,7 +38,7 @@ export default class extends Level {
     super.update()
     if(this.walkPlayer) {
       this.player.moveRight()
-      this.daughter.body.moveRight(200)
+      this.daughter.body.moveRight(145)
     }
   }
 
@@ -47,7 +46,7 @@ export default class extends Level {
     this.daughterSpeak("Papa, stop,\nYou aren't well!",{x:20,y:-10},()=>{
       this.speak("Get off of me!",{x:27},()=>{
         this.walkPlayer = true
-        this.wait(1000,()=>{
+        this.forceWait(1500,()=>{
           this.walkPlayer = false
           this.player.stopWalking()
           this.daughter.body.setZeroVelocity()
