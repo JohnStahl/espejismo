@@ -15,6 +15,15 @@ export default class extends Level {
   createObjects() {
     this.createObject(512,0,'cornfield_background')
     this.createObject(512,0,'cornfield_midground')
+    this.createObject(200,100,'corn_stalk')
+    this.createObject(400,100,'corn_stalk')
+    this.createObject(600,100,'corn_stalk')
+    this.createObject(800,120,'corn_stalk')
+    this.createObject(100,50,'corn_stalk')
+    this.createObject(300,50,'corn_stalk')
+    this.createObject(500,50,'corn_stalk')
+    this.createObject(700,50,'corn_stalk')
+    this.createObject(900,50,'corn_stalk')
     this.createObject(512,0,'cornfield_ground')
     this.createObject(700,-40,'scarecrow_post')
   }
