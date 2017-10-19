@@ -52,7 +52,7 @@ export default class extends Level {
       this.forceWait(2000,()=>{
         this.wait(1000,()=>{
           this.speak("You too eh?",{y:10,x:20},()=>{
-            this.speak("Looks like I'll\nneed to fight",{x: 20, y: 0},()=>{
+            this.speak("Looks like I'll\nneed to fight",{x: 20, y: -25,arrows:['left','up','right']},()=>{
               this.player.enableSwordMode()
               this.forceWait(500,()=>{
                 this.scarecrow.transition()

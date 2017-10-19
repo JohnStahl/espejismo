@@ -27,7 +27,6 @@ export default class extends Level {
         this.player.moveRight()
         this.forceWait(1000,()=>{
           this.player.stop()
-          console.log(this.player.x)
           this.wait(1000,()=>{
             this.speak("This is the\nlast time you\ncross me\nold friend!",{x:35,y:-30},()=>{
               this.player.collapse()

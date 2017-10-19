@@ -46,5 +46,10 @@ resize objects/raw/cornfield/ground.png 1024 cornfield_ground.png
 resize objects/raw/cornfield/scarecrowPost.png x300 scarecrow_post.png
 resize scarecrow/raw/awaken/scarecrow_awaken.0000.png x250 scarecrow.png
 
+resize objects/raw/arrows/arrowUp.png 32 arrow_up.png
+resize objects/raw/arrows/arrowDown.png 32 arrow_down.png
+resize objects/raw/arrows/arrowLeft.png 32 arrow_left.png
+resize objects/raw/arrows/arrowRight.png 32 arrow_right.png
+
 ffmpeg -y -t 19 -i audio/'Maria-Luiza Original.wav' -acodec libmp3lame ../web/assets/audio/song.mp3
 ffmpeg -y -t 19 -i audio/'Maria-Luiza Altered.wav' -acodec libmp3lame ../web/assets/audio/songAltered.mp3

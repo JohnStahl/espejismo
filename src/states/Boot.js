@@ -52,6 +52,10 @@ export default class extends Phaser.State {
     this.loadImage('cornfield_midground')
     this.loadImage('corn_stalk')
     this.loadImage('scarecrow_post')
+    this.loadImage('arrow_up')
+    this.loadImage('arrow_down')
+    this.loadImage('arrow_left')
+    this.loadImage('arrow_right')
 
     this.loadPhysics('objects')
 

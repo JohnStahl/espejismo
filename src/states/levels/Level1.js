@@ -43,7 +43,7 @@ export default class extends Level {
           this.walkPlayer = false
           this.player.stopWalking()
           this.daughter.body.setZeroVelocity()
-          this.speak("I have to get\nout of here",{x:27,y:-10},()=> {
+          this.speak("I have to get\nout of here",{x:27,y:-25,arrows:['left','right']},()=> {
             this.player.leftEdgePos = 380
           })
         })

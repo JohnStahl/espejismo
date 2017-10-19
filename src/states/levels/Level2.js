@@ -21,11 +21,11 @@ export default class extends Level {
   }
 
   levelStart() {
-    this.speak("What happened\nto the bridge!?",{x:15},()=>{
+    this.speak("What's happened\nto the bridge?!",{x:12},()=>{
       this.wait(2000,()=>{
         this.speak("Someone is trying\nto stop me...",{x:5},()=>{
           this.wait(1000,()=>{
-            this.speak("I'll have to jump\nto the other side",{x:5,y:3})
+            this.speak("I'll have to jump\nto the other side",{x:20,y:-25,arrows:['up']})
           })
         })
       })

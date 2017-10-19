@@ -36,7 +36,7 @@ export default class extends Level {
       this.wait(400,()=>{
         this.speak("What in the devil?",{y:10},()=>{
           this.wait(1000,()=>{
-            this.speak("I can't let that\nmonster get me",{x:-5,y:10},()=>{
+            this.speak("I can't let that\nmonster get me",{x:16,y:0},()=>{
               this.monster.walk()
             })
           })
