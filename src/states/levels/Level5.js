@@ -20,6 +20,7 @@ export default class extends Level {
   }
 
   createObjects() {
+    this.attacked =false
     this.createObject(-220, -100, 'dragon')
     this.createObject(512,0,'ground')
 
