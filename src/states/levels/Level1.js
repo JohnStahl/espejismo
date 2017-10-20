@@ -35,7 +35,7 @@ export default class extends Level {
     super.update()
     if(this.walkPlayer) {
       this.player.moveRight()
-      this.daughter.body.moveRight(180)
+      this.daughter.body.moveRight(145)
     }
   }
 
@@ -43,7 +43,7 @@ export default class extends Level {
     this.daughterSpeak("Papa, stop,\nYou aren't well!",{x:20,y:-10},()=>{
       this.speak("Let go of me!",{x:25},()=>{
         this.walkPlayer = true
-        this.forceWait(1500,()=>{
+        this.forceWait(1000,()=>{
           this.walkPlayer = false
           this.player.stopWalking()
           this.daughter.body.setZeroVelocity()
